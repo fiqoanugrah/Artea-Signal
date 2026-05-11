@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, CheckCircle2, LockKeyhole, MessageSquare, Send, Trash2 } from "lucide-react";
 import { addComment, moveReportToTrash, updateReportPriority, updateReportStatus } from "@/app/reports/actions";
 import { ConfirmTrashButton } from "@/components/confirm-trash-button";
+import { EvidenceGalleryCarousel } from "@/components/evidence-gallery-carousel";
 import { StatusPill } from "@/components/status-pill";
 import { Topbar } from "@/components/topbar";
 import { canCurrentUserTriage, getCurrentUser, isCurrentUserAdmin } from "@/lib/auth";
@@ -76,17 +77,7 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
           {report.evidence.length > 1 || report.evidence.some((item) => item.mediaType === "video") ? (
             <>
               <h2>Evidence gallery</h2>
-              <div className="evidence-gallery">
-                {report.evidence.map((item) => (
-                  <div className="evidence-gallery-item" key={item.id}>
-                    {item.mediaType === "video" ? (
-                      <video controls src={item.url} />
-                    ) : (
-                      <Image alt="" height={220} src={item.url} width={320} />
-                    )}
-                  </div>
-                ))}
-              </div>
+              <EvidenceGalleryCarousel evidence={report.evidence} />
             </>
           ) : null}
 

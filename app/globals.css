@@ -1211,6 +1211,60 @@ textarea {
   white-space: nowrap;
 }
 
+.detail-evidence-carousel {
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  display: grid;
+  gap: 12px;
+  margin: 12px 0 22px;
+  padding: 14px;
+}
+
+.detail-evidence-stage {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  margin: 0;
+  overflow: hidden;
+}
+
+.detail-evidence-stage img,
+.detail-evidence-stage video {
+  background: rgba(0, 0, 0, 0.28);
+  display: block;
+  height: min(62svh, 560px);
+  object-fit: contain;
+  width: 100%;
+}
+
+.detail-evidence-stage figcaption {
+  align-items: center;
+  color: var(--muted-strong);
+  display: flex;
+  font-size: 13px;
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.detail-carousel-actions {
+  justify-content: space-between;
+}
+
+.detail-evidence-strip {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(86px, 1fr));
+}
+
+.detail-evidence-strip .strip-thumb {
+  height: 82px;
+}
+
+.detail-evidence-strip .strip-thumb img {
+  object-fit: contain;
+}
+
 .empty-preview {
   align-items: center;
   color: var(--muted);
