@@ -104,16 +104,22 @@ textarea {
 
 .brand-mark {
   align-items: center;
-  background: linear-gradient(135deg, var(--purple), #ea3cff 58%, var(--orange));
-  border: 1px solid rgba(255, 255, 255, 0.26);
-  border-radius: 14px;
-  box-shadow: 0 0 30px rgba(139, 61, 255, 0.35);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(139, 61, 255, 0.32);
   display: inline-flex;
-  font-weight: 900;
   height: 42px;
   justify-content: center;
+  overflow: hidden;
   width: 42px;
+}
+
+.brand-mark img {
+  display: block;
+  height: 34px;
+  object-fit: contain;
+  width: 34px;
 }
 
 .brand-title {

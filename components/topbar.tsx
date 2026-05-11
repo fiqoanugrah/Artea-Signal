@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { LogIn, LogOut, Plus, RadioTower, Shield, Trash2, UserCircle } from "lucide-react";
 import { logout } from "@/app/auth/actions";
@@ -10,7 +11,9 @@ export async function Topbar() {
   return (
     <header className="topbar">
       <Link className="brand" href="/">
-        <span className="brand-mark">AS</span>
+        <span className="brand-mark">
+          <Image alt="Artea AI logo" height={34} priority src="/artea-logo.png" width={34} />
+        </span>
         <span>
           <span className="brand-title">Artea Signal</span>
           <span className="brand-subtitle">Product signals for Artea AI</span>
