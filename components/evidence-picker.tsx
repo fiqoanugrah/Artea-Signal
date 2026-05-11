@@ -11,10 +11,17 @@ type Preview = {
   url: string;
 };
 
-export function EvidencePicker() {
+type EvidencePickerProps = {
+  files?: File[];
+  inputName?: string;
+  onFilesChange?: (files: File[]) => void;
+};
+
+export function EvidencePicker({ files: controlledFiles, inputName = "evidence", onFilesChange }: EvidencePickerProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [files, setFiles] = useState<File[]>([]);
+  const [internalFiles, setInternalFiles] = useState<File[]>([]);
+  const files = controlledFiles ?? internalFiles;
 
   const previews = useMemo<Preview[]>(
     () =>
@@ -31,15 +38,23 @@ export function EvidencePicker() {
     const incoming = Array.from(nextFiles || []);
     const merged = [...files, ...incoming];
     syncInputFiles(merged);
-    setFiles(merged);
+    setFilesState(merged);
     setActiveIndex(Math.max(0, merged.length - incoming.length));
   }
 
   function removeActive() {
     const nextFiles = files.filter((_, index) => index !== activeIndex);
     syncInputFiles(nextFiles);
-    setFiles(nextFiles);
+    setFilesState(nextFiles);
     setActiveIndex((index) => Math.max(0, Math.min(index, nextFiles.length - 1)));
+  }
+
+  function setFilesState(nextFiles: File[]) {
+    onFilesChange?.(nextFiles);
+
+    if (!controlledFiles) {
+      setInternalFiles(nextFiles);
+    }
   }
 
   function syncInputFiles(nextFiles: File[]) {
@@ -67,7 +82,7 @@ export function EvidencePicker() {
           accept="image/*,video/*"
           id="evidence"
           multiple
-          name="evidence"
+          name={inputName}
           onChange={(event) => handleFiles(event.target.files)}
           ref={inputRef}
           type="file"
