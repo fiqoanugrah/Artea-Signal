@@ -593,6 +593,7 @@ textarea {
   min-height: 182px;
   overflow: hidden;
   padding: 14px;
+  position: relative;
   transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
@@ -627,6 +628,10 @@ textarea {
 
 .report-content {
   min-width: 0;
+}
+
+.report-card.has-actions .report-content {
+  padding-right: 54px;
 }
 
 .report-meta {
@@ -679,7 +684,11 @@ textarea {
 .report-action-row {
   display: flex;
   justify-content: flex-end;
-  margin-top: 14px;
+  margin: 0;
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  z-index: 1;
 }
 
 .report-card h3 {

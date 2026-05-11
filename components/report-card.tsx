@@ -16,7 +16,7 @@ export function ReportCard({ canManage = false, report }: ReportCardProps) {
   const latestComment = report.comments.at(-1);
 
   return (
-    <article className="report-card">
+    <article className={`report-card${canManage ? " has-actions" : ""}`}>
       <Link className="report-thumb" href={`/reports/${report.id}`}>
         {coverMedia?.mediaType === "video" ? (
           <video muted playsInline preload="metadata" src={coverMedia.url} />
