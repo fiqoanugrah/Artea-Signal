@@ -689,6 +689,41 @@ textarea {
   padding: 10px 12px;
 }
 
+.trash-disclosure {
+  margin: 18px 0 8px;
+}
+
+.trash-disclosure summary {
+  align-items: center;
+  background: var(--danger-soft);
+  border: 1px solid rgba(255, 93, 108, 0.42);
+  border-radius: 999px;
+  color: #ffc5cb;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 900;
+  gap: 8px;
+  list-style: none;
+  padding: 11px 16px;
+  user-select: none;
+}
+
+.trash-disclosure summary::-webkit-details-marker {
+  display: none;
+}
+
+.trash-disclosure[open] summary {
+  background: rgba(255, 93, 108, 0.22);
+}
+
+.trash-disclosure-panel {
+  border: 1px solid rgba(255, 93, 108, 0.22);
+  border-radius: 18px;
+  margin-top: 12px;
+  padding: 14px;
+}
+
 .empty-state {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.045));
   border: 1px solid var(--line);

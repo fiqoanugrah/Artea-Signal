@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CheckCircle2, LockKeyhole, MessageSquare, Send } from "lucide-react";
+import { ArrowLeft, CheckCircle2, LockKeyhole, MessageSquare, Send, Trash2 } from "lucide-react";
 import { addComment, moveReportToTrash, updateReportPriority, updateReportStatus } from "@/app/reports/actions";
 import { ConfirmTrashButton } from "@/components/confirm-trash-button";
 import { StatusPill } from "@/components/status-pill";
@@ -180,9 +180,12 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
             ) : null}
           </div>
           {canTrash ? (
-            <>
-              <h2>Admin danger zone</h2>
-              <form action={moveReportToTrash} className="form-grid" style={{ marginTop: 0 }}>
+            <details className="trash-disclosure">
+              <summary>
+                <Trash2 size={16} />
+                Trash report
+              </summary>
+              <form action={moveReportToTrash} className="form-grid trash-disclosure-panel">
                 <input name="report_id" type="hidden" value={report.id} />
                 <div className="field">
                   <label htmlFor="delete_reason">Trash reason</label>
@@ -194,7 +197,7 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
                 </div>
                 <ConfirmTrashButton actionText="Move to trash" variant="text" />
               </form>
-            </>
+            </details>
           ) : null}
 
           <h2>
