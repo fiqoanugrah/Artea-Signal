@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="540" viewBox="0 0 900 540" role="img" aria-label="Mobile onboarding screenshot placeholder">
+  <rect width="900" height="540" fill="#f7f6f2"/>
+  <rect x="332" y="36" width="236" height="468" rx="34" fill="#11120f"/>
+  <rect x="350" y="60" width="200" height="420" rx="24" fill="#ffffff"/>
+  <rect x="374" y="94" width="88" height="10" rx="5" fill="#dedbd1"/>
+  <rect x="374" y="142" width="152" height="18" rx="9" fill="#181916"/>
+  <rect x="374" y="178" width="132" height="10" rx="5" fill="#686a61"/>
+  <rect x="374" y="206" width="152" height="72" rx="12" fill="#d9f3ee"/>
+  <rect x="374" y="296" width="152" height="72" rx="12" fill="#ffe3dc"/>
+  <rect x="374" y="398" width="152" height="44" rx="12" fill="#dc5f4a"/>
+  <rect x="396" y="415" width="108" height="10" rx="5" fill="#ffffff"/>
+</svg>

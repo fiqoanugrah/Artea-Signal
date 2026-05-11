@@ -1,0 +1,11 @@
+.next
+node_modules
+dist
+out
+.vercel
+.npm-cache
+.env
+.env.local
+.DS_Store
+*.swp
+npm-debug.log*

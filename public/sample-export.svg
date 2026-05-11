@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="540" viewBox="0 0 900 540" role="img" aria-label="Export workflow screenshot placeholder">
+  <rect width="900" height="540" fill="#fbf3ef"/>
+  <rect x="98" y="86" width="300" height="368" rx="16" fill="#ffffff" stroke="#dedbd1" stroke-width="3"/>
+  <rect x="502" y="86" width="300" height="368" rx="16" fill="#ffffff" stroke="#dedbd1" stroke-width="3"/>
+  <path d="M430 270h40" stroke="#dc5f4a" stroke-width="14" stroke-linecap="round"/>
+  <path d="M458 242l28 28-28 28" fill="none" stroke="#dc5f4a" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="134" y="124" width="152" height="14" rx="7" fill="#181916"/>
+  <rect x="134" y="170" width="226" height="10" rx="5" fill="#686a61"/>
+  <rect x="134" y="198" width="198" height="10" rx="5" fill="#686a61"/>
+  <rect x="134" y="226" width="240" height="10" rx="5" fill="#686a61"/>
+  <rect x="538" y="124" width="152" height="14" rx="7" fill="#181916"/>
+  <rect x="538" y="170" width="226" height="10" rx="5" fill="#686a61"/>
+  <rect x="538" y="198" width="198" height="10" rx="5" fill="#686a61"/>
+  <rect x="538" y="226" width="240" height="10" rx="5" fill="#686a61"/>
+  <rect x="538" y="360" width="160" height="44" rx="10" fill="#3b6ea8"/>
+</svg>

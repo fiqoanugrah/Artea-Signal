@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="540" viewBox="0 0 900 540" role="img" aria-label="Dashboard empty state screenshot placeholder">
+  <rect width="900" height="540" fill="#f7f6f2"/>
+  <rect x="70" y="70" width="760" height="400" rx="18" fill="#ffffff" stroke="#dedbd1" stroke-width="3"/>
+  <rect x="110" y="112" width="180" height="16" rx="8" fill="#181916"/>
+  <rect x="110" y="160" width="680" height="250" rx="14" fill="#fbfaf7" stroke="#dedbd1" stroke-width="3" stroke-dasharray="12 12"/>
+  <circle cx="450" cy="246" r="42" fill="#fff1cf"/>
+  <rect x="342" y="314" width="216" height="16" rx="8" fill="#181916"/>
+  <rect x="374" y="348" width="152" height="10" rx="5" fill="#686a61"/>
+</svg>
