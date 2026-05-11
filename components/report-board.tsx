@@ -99,9 +99,9 @@ export function ReportBoard({ canManage, reports }: ReportBoardProps) {
           <select aria-label="Filter by status" value={status} onChange={(event) => setStatus(event.target.value)}>
             <option value="">All status</option>
             <option value="new">New</option>
-            <option value="need-info">Need Info</option>
+            <option value="need-info">Need info</option>
             <option value="accepted">Accepted</option>
-            <option value="in-progress">In Progress</option>
+            <option value="in-progress">In progress</option>
             <option value="shipped">Shipped</option>
             <option value="rejected">Rejected</option>
           </select>

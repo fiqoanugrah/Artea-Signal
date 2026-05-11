@@ -35,6 +35,7 @@ type CommentRow = {
   author_id: string;
   body: string;
   created_at: string;
+  report_id?: string;
 };
 
 type EvidenceRow = {
@@ -152,10 +153,61 @@ export const getActiveReports = cache(async (filters: ReportFilters = {}) => {
     return mockReports;
   }
 
-  return (data as (ReportRow & { report_evidence?: EvidenceRow[] })[]).map((row) =>
-    mapRowToReport(row, [], row.report_evidence || [])
+  const rows = (data || []) as (ReportRow & { report_evidence?: EvidenceRow[] })[];
+  const reportIds = rows.map((row) => row.id);
+  const { commentsByReport, authors } = await getCommentsForReports(reportIds);
+
+  return rows.map((row) =>
+    mapRowToReport(row, commentsByReport[row.id] || [], row.report_evidence || [], authors)
   );
 });
+
+async function getCommentsForReports(reportIds: string[]) {
+  const commentsByReport: Record<string, CommentRow[]> = {};
+  const authors: Record<string, CommentAuthor> = {};
+
+  if (!reportIds.length) {
+    return { commentsByReport, authors };
+  }
+
+  const supabase = await createClient();
+  const { data: comments, error } = await supabase
+    .from("report_comments")
+    .select("id,report_id,author_id,body,created_at")
+    .in("report_id", reportIds)
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    console.error("Failed to fetch report comments", error.message);
+    return { commentsByReport, authors };
+  }
+
+  const commentRows = (comments || []) as CommentRow[];
+
+  for (const comment of commentRows) {
+    if (!comment.report_id) {
+      continue;
+    }
+
+    commentsByReport[comment.report_id] = commentsByReport[comment.report_id] || [];
+    commentsByReport[comment.report_id].push(comment);
+  }
+
+  const authorIds = Array.from(new Set(commentRows.map((comment) => comment.author_id)));
+
+  if (authorIds.length) {
+    const { data: profiles } = await supabase
+      .from("profiles")
+      .select("id,email,full_name,username,avatar_url,role")
+      .in("id", authorIds);
+
+    for (const profile of (profiles || []) as Array<CommentAuthor & { id: string }>) {
+      authors[profile.id] = profile;
+    }
+  }
+
+  return { commentsByReport, authors };
+}
 
 function applyLocalFilters(reports: Report[], filters: ReportFilters) {
   return reports.filter((report) => {

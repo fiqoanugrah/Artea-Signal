@@ -165,9 +165,9 @@ export const typeLabels: Record<ReportType, string> = {
 
 export const statusLabels: Record<ReportStatus, string> = {
   new: "New",
-  "need-info": "Need Info",
+  "need-info": "Need info",
   accepted: "Accepted",
-  "in-progress": "In Progress",
+  "in-progress": "In progress",
   shipped: "Shipped",
   rejected: "Rejected"
 };

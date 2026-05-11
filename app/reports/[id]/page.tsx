@@ -137,7 +137,7 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
             {user ? null : (
               <a className="button button-primary" href={`/login?next=/reports/${report.id}`}>
                 <LockKeyhole size={16} />
-                Login to act
+                Log in to act
               </a>
             )}
             {canTriage ? (
@@ -148,9 +148,9 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
                     <label htmlFor="status">Status</label>
                     <select id="status" name="status" defaultValue={report.status}>
                       <option value="new">New</option>
-                      <option value="need-info">Need Info</option>
+                      <option value="need-info">Need info</option>
                       <option value="accepted">Accepted</option>
-                      <option value="in-progress">In Progress</option>
+                      <option value="in-progress">In progress</option>
                       <option value="shipped">Shipped</option>
                       <option value="rejected">Rejected</option>
                     </select>

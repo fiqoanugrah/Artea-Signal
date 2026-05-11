@@ -42,22 +42,19 @@ export function ReportCard({ canManage = false, report }: ReportCardProps) {
             {priorityLabels[report.priority]}
           </span>
         </div>
-        <div className="report-footer">
-          <MessageSquare size={14} />
-          <strong>
-            {report.comments.length} {report.comments.length === 1 ? "comment" : "comments"}
-          </strong>
-        </div>
-        <div className={`card-comment-preview${latestComment ? "" : " is-empty"}`}>
-          <MessageSquare size={14} />
+        <div className="card-comments">
+          <div className="card-comments-head">
+            <MessageSquare size={14} />
+            <strong>
+              {report.comments.length} {report.comments.length === 1 ? "comment" : "comments"}
+            </strong>
+          </div>
           {latestComment ? (
-            <p>
+            <p className="card-comment-preview">
               <strong>{latestComment.author}</strong>
               <span>{latestComment.body}</span>
             </p>
-          ) : (
-            <p>No comments yet</p>
-          )}
+          ) : null}
         </div>
         {canManage ? (
           <form action={moveReportToTrash} className="report-action-row">
