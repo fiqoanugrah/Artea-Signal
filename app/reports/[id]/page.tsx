@@ -38,6 +38,8 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
     notFound();
   }
 
+  const coverMedia = report.evidence.find((item) => item.url === report.evidenceUrl) || report.evidence[0];
+
   return (
     <main className="page-shell">
       <Topbar />
@@ -61,9 +63,15 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
             <span className={`pill pill-priority-${report.priority}`}>{priorityLabels[report.priority]}</span>
           </div>
 
-          <div className="detail-image">
-            <Image alt={`Evidence for ${report.title}`} height={540} src={report.evidenceUrl} width={900} />
-          </div>
+          {coverMedia?.mediaType === "video" ? (
+            <div className="detail-image">
+              <video controls src={coverMedia.url} />
+            </div>
+          ) : (
+            <div className="detail-image">
+              <Image alt={`Evidence for ${report.title}`} height={540} src={report.evidenceUrl} width={900} />
+            </div>
+          )}
 
           {report.evidence.length > 1 || report.evidence.some((item) => item.mediaType === "video") ? (
             <>

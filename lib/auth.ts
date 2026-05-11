@@ -1,3 +1,4 @@
+import { unstable_rethrow } from "next/navigation";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
@@ -19,12 +20,18 @@ export async function getCurrentUser() {
     return null;
   }
 
-  const supabase = await createClient();
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user }
+    } = await supabase.auth.getUser();
 
-  return user;
+    return user;
+  } catch (error) {
+    unstable_rethrow(error);
+    console.error("Failed to read current user", error);
+    return null;
+  }
 }
 
 export async function getCurrentProfile() {
@@ -34,14 +41,20 @@ export async function getCurrentProfile() {
     return null;
   }
 
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from("profiles")
-    .select("id,email,full_name,username,avatar_url,role,created_at,updated_at")
-    .eq("id", user.id)
-    .maybeSingle<Profile>();
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase
+      .from("profiles")
+      .select("id,email,full_name,username,avatar_url,role,created_at,updated_at")
+      .eq("id", user.id)
+      .maybeSingle<Profile>();
 
-  return data;
+    return data;
+  } catch (error) {
+    unstable_rethrow(error);
+    console.error("Failed to read current profile", error);
+    return null;
+  }
 }
 
 export async function isCurrentUserAdmin() {

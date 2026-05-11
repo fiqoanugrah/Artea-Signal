@@ -12,10 +12,16 @@ type ReportCardProps = {
 };
 
 export function ReportCard({ canManage = false, report }: ReportCardProps) {
+  const coverMedia = report.evidence.find((item) => item.url === report.evidenceUrl) || report.evidence[0];
+
   return (
     <article className="report-card">
       <Link className="report-thumb" href={`/reports/${report.id}`}>
-        <Image alt={`Evidence preview for ${report.title}`} height={220} src={report.evidenceUrl} width={220} />
+        {coverMedia?.mediaType === "video" ? (
+          <video muted playsInline preload="metadata" src={coverMedia.url} />
+        ) : (
+          <Image alt={`Evidence preview for ${report.title}`} height={220} src={report.evidenceUrl} width={220} />
+        )}
       </Link>
       <div className="report-content">
         <div className="report-meta">

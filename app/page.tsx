@@ -36,6 +36,8 @@ export default async function Home() {
   const metrics = getMetricsFromReports(reports);
   const liveQueue = getLiveQueue(reports);
   const featuredSignal = liveQueue[0];
+  const featuredMedia =
+    featuredSignal?.evidence.find((item) => item.url === featuredSignal.evidenceUrl) || featuredSignal?.evidence[0];
   const nextSignals = liveQueue.slice(1, 3);
 
   return (
@@ -77,7 +79,11 @@ export default async function Home() {
           {featuredSignal ? (
             <>
               <Link className="console-feature" href={`/reports/${featuredSignal.id}`}>
-                <Image alt="" height={240} priority src={featuredSignal.evidenceUrl} width={420} />
+                {featuredMedia?.mediaType === "video" ? (
+                  <video muted playsInline preload="metadata" src={featuredMedia.url} />
+                ) : (
+                  <Image alt="" height={240} priority src={featuredSignal.evidenceUrl} width={420} />
+                )}
                 <div>
                   <span className={`pill pill-${featuredSignal.type}`}>
                     {typeLabels[featuredSignal.type]}

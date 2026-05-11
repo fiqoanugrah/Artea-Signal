@@ -338,7 +338,8 @@ textarea {
   text-decoration: none;
 }
 
-.console-feature img {
+.console-feature img,
+.console-feature video {
   border-radius: 16px;
   display: block;
   height: 230px;
@@ -617,7 +618,8 @@ textarea {
   overflow: hidden;
 }
 
-.report-thumb img {
+.report-thumb img,
+.report-thumb video {
   height: 100%;
   object-fit: cover;
   width: 100%;
@@ -889,7 +891,8 @@ textarea {
   overflow: hidden;
 }
 
-.detail-image img {
+.detail-image img,
+.detail-image video {
   display: block;
   width: 100%;
 }
@@ -1261,7 +1264,8 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .console-feature img {
+  .console-feature img,
+  .console-feature video {
     height: 210px;
   }
 
