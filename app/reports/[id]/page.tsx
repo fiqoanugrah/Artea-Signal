@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CheckCircle2, LockKeyhole, MessageSquare, Send } from "lucide-react";
-import { addComment, moveReportToTrash, updateReportStatus } from "@/app/reports/actions";
+import { addComment, moveReportToTrash, updateReportPriority, updateReportStatus } from "@/app/reports/actions";
 import { ConfirmTrashButton } from "@/components/confirm-trash-button";
 import { StatusPill } from "@/components/status-pill";
 import { Topbar } from "@/components/topbar";
@@ -58,7 +58,7 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
           <div className="badge-row">
             <StatusPill type={report.type} />
             <StatusPill status={report.status} />
-            <span className="pill pill-new">{priorityLabels[report.priority]}</span>
+            <span className={`pill pill-priority-${report.priority}`}>{priorityLabels[report.priority]}</span>
           </div>
 
           <div className="detail-image">
@@ -116,8 +116,8 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
           <h2>Actions</h2>
           {user ? (
             <p className="auth-note">
-              Kamu login sebagai {user.email}. Tombol triage siap disambung ke role
-              reviewer/admin.
+              Kamu login sebagai {user.email}. Reviewer dan admin bisa mengubah status
+              serta priority signal.
             </p>
           ) : (
             <p className="auth-note">
@@ -133,24 +133,42 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
               </a>
             )}
             {canTriage ? (
-              <form action={updateReportStatus} className="inline-form">
-                <input name="report_id" type="hidden" value={report.id} />
-                <div className="field compact-field">
-                  <label htmlFor="status">Status</label>
-                  <select id="status" name="status" defaultValue={report.status}>
-                    <option value="new">New</option>
-                    <option value="need-info">Need Info</option>
-                    <option value="accepted">Accepted</option>
-                    <option value="in-progress">In Progress</option>
-                    <option value="shipped">Shipped</option>
-                    <option value="rejected">Rejected</option>
-                  </select>
-                </div>
-                <button className="button button-secondary" type="submit">
-                  <CheckCircle2 size={16} />
-                  Update
-                </button>
-              </form>
+              <>
+                <form action={updateReportStatus} className="inline-form">
+                  <input name="report_id" type="hidden" value={report.id} />
+                  <div className="field compact-field">
+                    <label htmlFor="status">Status</label>
+                    <select id="status" name="status" defaultValue={report.status}>
+                      <option value="new">New</option>
+                      <option value="need-info">Need Info</option>
+                      <option value="accepted">Accepted</option>
+                      <option value="in-progress">In Progress</option>
+                      <option value="shipped">Shipped</option>
+                      <option value="rejected">Rejected</option>
+                    </select>
+                  </div>
+                  <button className="button button-secondary" type="submit">
+                    <CheckCircle2 size={16} />
+                    Update status
+                  </button>
+                </form>
+                <form action={updateReportPriority} className="inline-form">
+                  <input name="report_id" type="hidden" value={report.id} />
+                  <div className="field compact-field">
+                    <label htmlFor="priority">Priority</label>
+                    <select id="priority" name="priority" defaultValue={report.priority}>
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                      <option value="urgent">Urgent</option>
+                    </select>
+                  </div>
+                  <button className="button button-secondary" type="submit">
+                    <CheckCircle2 size={16} />
+                    Update priority
+                  </button>
+                </form>
+              </>
             ) : null}
           </div>
           {canTrash ? (

@@ -176,6 +176,33 @@ export async function updateReportStatus(formData: FormData) {
   redirect(`/reports/${reportId}`);
 }
 
+export async function updateReportPriority(formData: FormData) {
+  const canTriage = await canCurrentUserTriage();
+
+  if (!canTriage) {
+    redirect("/login?error=Reviewer%20or%20admin%20access%20required");
+  }
+
+  const reportId = String(formData.get("report_id") || "");
+  const priority = coercePriority(formData.get("priority"));
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("reports")
+    .update({
+      priority,
+      updated_at: new Date().toISOString()
+    })
+    .eq("id", reportId);
+
+  if (error) {
+    redirect(`/reports/${reportId}?error=${encodeURIComponent(error.message)}`);
+  }
+
+  revalidatePath("/");
+  revalidatePath(`/reports/${reportId}`);
+  redirect(`/reports/${reportId}`);
+}
+
 export async function moveReportToTrash(formData: FormData) {
   const isAdmin = await isCurrentUserAdmin();
 
