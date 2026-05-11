@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { KeyRound, LockKeyhole, Save, Shield, UserCircle } from "lucide-react";
+import { KeyRound, LockKeyhole, Save, Shield, Sparkles, UserCircle } from "lucide-react";
 import { updatePassword, updateProfile } from "@/app/auth/actions";
 import { Topbar } from "@/components/topbar";
 import { getCurrentProfile, getCurrentUser } from "@/lib/auth";
@@ -22,8 +22,12 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
     <main className="page-shell">
       <Topbar />
 
-      <section className="auth-layout">
+      <section className="auth-stage">
         <div className="auth-copy">
+          <span className="eyebrow">
+            <UserCircle size={14} />
+            Account settings
+          </span>
           <h1>Profile</h1>
           <p>
             Tempat user melihat identitas akun, role, dan akses mereka di Artea
@@ -52,12 +56,22 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
             </>
           ) : (
             <>
-              <div className="profile-avatar">
-                {profile?.avatar_url ? (
-                  <Image alt="" height={60} src={profile.avatar_url} width={60} />
-                ) : (
-                  <UserCircle size={32} />
-                )}
+              <div className="profile-hero">
+                <div className="profile-avatar">
+                  {profile?.avatar_url ? (
+                    <Image alt="" height={72} src={profile.avatar_url} width={72} />
+                  ) : (
+                    <UserCircle size={36} />
+                  )}
+                </div>
+                <div>
+                  <span className="filter-pill">
+                    <Sparkles size={14} />
+                    {profile?.role || "member"}
+                  </span>
+                  <h2>{profile?.full_name || profile?.username || user.email}</h2>
+                  <p>{user.email}</p>
+                </div>
               </div>
               <div className="info-list">
                 <div className="info-item">

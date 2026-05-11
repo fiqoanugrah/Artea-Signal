@@ -1,4 +1,4 @@
-import { LogIn } from "lucide-react";
+import { LockKeyhole, LogIn, RadioTower, ShieldCheck } from "lucide-react";
 import { login } from "@/app/auth/actions";
 import { Topbar } from "@/components/topbar";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
@@ -19,16 +19,40 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
     <main className="page-shell">
       <Topbar />
 
-      <section className="auth-layout">
+      <section className="auth-stage auth-stage-compact">
         <div className="auth-copy">
+          <span className="eyebrow">
+            <LockKeyhole size={14} />
+            Secure workspace
+          </span>
           <h1>Login</h1>
           <p>
             Masuk untuk submit report, komentar, approve, reject, assign owner,
             dan update status. Board tetap bisa dibaca publik tanpa akun.
           </p>
+          <div className="auth-benefits">
+            <span>
+              <RadioTower size={14} />
+              Public board
+            </span>
+            <span>
+              <ShieldCheck size={14} />
+              Gated actions
+            </span>
+          </div>
         </div>
 
         <form action={login} className="form-panel auth-card">
+          <div className="auth-card-head">
+            <span className="auth-card-icon">
+              <LogIn size={18} />
+            </span>
+            <div>
+              <h2>Welcome back</h2>
+              <p>Continue triage and product signal review.</p>
+            </div>
+          </div>
+
           {!isSupabaseConfigured() ? (
             <p className="auth-note auth-note-warning">
               Supabase belum dikonfigurasi. Isi `.env.local` dari `.env.example`

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LockKeyhole, Send, Shield } from "lucide-react";
+import { LockKeyhole, Send, Shield, UserPlus } from "lucide-react";
 import { inviteUser } from "@/app/auth/actions";
 import { Topbar } from "@/components/topbar";
 import { getCurrentProfile, getCurrentUser } from "@/lib/auth";
@@ -22,9 +22,13 @@ export default async function AdminUsersPage({ searchParams }: AdminUsersPagePro
     <main className="page-shell">
       <Topbar />
 
-      <section className="auth-layout">
+      <section className="auth-stage auth-stage-compact">
         <div className="auth-copy">
-          <h1>User admin</h1>
+          <span className="eyebrow">
+            <Shield size={14} />
+            Admin console
+          </span>
+          <h1>User access</h1>
           <p>
             Public signup dimatikan. User baru dibuat lewat invite dari admin,
             supaya akses submit, komentar, dan approval tetap terkontrol.
@@ -32,6 +36,16 @@ export default async function AdminUsersPage({ searchParams }: AdminUsersPagePro
         </div>
 
         <div className="form-panel auth-card">
+          <div className="auth-card-head">
+            <span className="auth-card-icon">
+              <UserPlus size={18} />
+            </span>
+            <div>
+              <h2>Invite teammate</h2>
+              <p>Choose access level before sending the invite.</p>
+            </div>
+          </div>
+
           {!isSupabaseConfigured() ? (
             <p className="auth-note auth-note-warning">
               Supabase belum dikonfigurasi. Isi `.env.local` dulu.
