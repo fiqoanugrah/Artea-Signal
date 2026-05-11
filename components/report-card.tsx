@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarDays, MessageSquare, UserRound } from "lucide-react";
+import { CalendarDays, MessageSquare } from "lucide-react";
 import { moveReportToTrash } from "@/app/reports/actions";
 import { ConfirmTrashButton } from "@/components/confirm-trash-button";
 import { getReportCode, priorityLabels, Report } from "@/lib/reports";
@@ -13,6 +13,7 @@ type ReportCardProps = {
 
 export function ReportCard({ canManage = false, report }: ReportCardProps) {
   const coverMedia = report.evidence.find((item) => item.url === report.evidenceUrl) || report.evidence[0];
+  const latestComment = report.comments.at(-1);
 
   return (
     <article className="report-card">
@@ -42,10 +43,21 @@ export function ReportCard({ canManage = false, report }: ReportCardProps) {
           </span>
         </div>
         <div className="report-footer">
-          <UserRound size={14} />
-          <span>{report.owner}</span>
           <MessageSquare size={14} />
-          <span>{report.comments.length}</span>
+          <strong>
+            {report.comments.length} {report.comments.length === 1 ? "comment" : "comments"}
+          </strong>
+        </div>
+        <div className={`card-comment-preview${latestComment ? "" : " is-empty"}`}>
+          <MessageSquare size={14} />
+          {latestComment ? (
+            <p>
+              <strong>{latestComment.author}</strong>
+              <span>{latestComment.body}</span>
+            </p>
+          ) : (
+            <p>No comments yet</p>
+          )}
         </div>
         {canManage ? (
           <form action={moveReportToTrash} className="report-action-row">
