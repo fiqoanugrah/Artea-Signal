@@ -292,8 +292,8 @@ textarea {
 }
 
 .signal-console {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
   padding: 18px;
 }
 
@@ -321,21 +321,33 @@ textarea {
   border: 1px solid var(--line);
   border-radius: 22px;
   display: grid;
+  grid-template-columns: minmax(180px, 0.9fr) minmax(0, 1fr);
   gap: 16px;
+  align-items: center;
+  align-content: start;
+  color: inherit;
+  min-height: 0;
   overflow: hidden;
   padding: 12px;
+  text-decoration: none;
 }
 
 .console-feature img {
   border-radius: 16px;
-  height: 210px;
+  display: block;
+  height: 230px;
   object-fit: cover;
   width: 100%;
 }
 
+.console-feature > div {
+  min-width: 0;
+  padding: 4px 4px 4px 0;
+}
+
 .console-feature h2 {
-  font-size: 24px;
-  line-height: 1;
+  font-size: clamp(22px, 2.4vw, 34px);
+  line-height: 1.05;
   margin: 12px 0 8px;
 }
 
@@ -355,21 +367,46 @@ textarea {
 }
 
 .console-list a {
+  align-items: center;
+  color: inherit;
   display: grid;
-  grid-template-columns: 1fr auto;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-height: 56px;
+  padding: 12px 14px;
+  text-decoration: none;
+}
+
+.console-list a + a {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .console-list span,
 .console-list strong {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--muted-strong);
   font-size: 13px;
-  padding: 12px;
+}
+
+.console-list span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .console-list strong {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
   color: #fff;
+  padding: 6px 10px;
   text-align: right;
+  white-space: nowrap;
+}
+
+.console-list > span {
+  color: var(--muted);
+  padding: 14px;
 }
 
 .metrics-grid {
@@ -1210,6 +1247,20 @@ textarea {
 
   .filter-form {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .console-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .console-feature img {
+    height: 210px;
+  }
+
+  .console-feature > div {
+    padding: 0;
   }
 }
 
