@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CalendarDays, MessageSquare } from "lucide-react";
 import { moveReportToTrash } from "@/app/reports/actions";
 import { ConfirmTrashButton } from "@/components/confirm-trash-button";
-import { getReportCode, priorityLabels, Report } from "@/lib/reports";
+import { getDisplayReportCode, priorityLabels, Report } from "@/lib/reports";
 import { StatusPill } from "@/components/status-pill";
 
 type ReportCardProps = {
@@ -26,7 +26,7 @@ export function ReportCard({ canManage = false, report }: ReportCardProps) {
       </Link>
       <div className="report-content">
         <div className="report-meta">
-          <span>{getReportCode(report.id)}</span>
+          <span>{getDisplayReportCode(report)}</span>
           <span>|</span>
           <CalendarDays size={14} />
           <span>{report.createdAt}</span>

@@ -10,7 +10,7 @@ import { StatusPill } from "@/components/status-pill";
 import { Topbar } from "@/components/topbar";
 import { canCurrentUserTriage, getCurrentUser, isCurrentUserAdmin } from "@/lib/auth";
 import { getReportById } from "@/lib/report-store";
-import { getReportCode, priorityLabels } from "@/lib/reports";
+import { getDisplayReportCode, priorityLabels } from "@/lib/reports";
 
 type ReportDetailPageProps = {
   params: Promise<{
@@ -52,7 +52,7 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
       <section className="detail-grid" style={{ marginTop: 18 }}>
         <article className="detail-main">
           <div className="report-meta">
-            <span>{getReportCode(report.id)}</span>
+            <span>{getDisplayReportCode(report)}</span>
             <span>|</span>
             <span>{report.createdAt}</span>
           </div>

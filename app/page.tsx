@@ -5,7 +5,7 @@ import { ReportBoard } from "@/components/report-board";
 import { Topbar } from "@/components/topbar";
 import { isCurrentUserAdmin } from "@/lib/auth";
 import { getActiveReports, getMetricsFromReports } from "@/lib/report-store";
-import { getReportCode, priorityLabels, Report, statusLabels, typeLabels } from "@/lib/reports";
+import { getDisplayReportCode, priorityLabels, Report, statusLabels, typeLabels } from "@/lib/reports";
 
 const priorityScore: Record<Report["priority"], number> = {
   urgent: 4,
@@ -99,7 +99,7 @@ export default async function Home() {
                   nextSignals.map((report) => (
                     <Link href={`/reports/${report.id}`} key={report.id}>
                       <span>
-                        {getReportCode(report.id)} {report.title}
+                        {getDisplayReportCode(report)} {report.title}
                       </span>
                       <strong>{statusLabels[report.status]}</strong>
                     </Link>

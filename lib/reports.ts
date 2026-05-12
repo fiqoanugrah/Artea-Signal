@@ -25,6 +25,7 @@ export type ReportMedia = {
 
 export type Report = {
   id: string;
+  code?: string;
   title: string;
   summary: string;
   description: string;
@@ -196,4 +197,8 @@ export function getMetrics() {
 
 export function getReportCode(id: string) {
   return id.startsWith("AS-") ? id : `AS-${id.slice(0, 4).toUpperCase()}`;
+}
+
+export function getDisplayReportCode(report: Pick<Report, "id" | "code">) {
+  return report.code || getReportCode(report.id);
 }

@@ -52,8 +52,8 @@ function formatDate(value: string) {
   }).format(new Date(value));
 }
 
-function codeFromId(id: string) {
-  return `AS-${id.slice(0, 4).toUpperCase()}`;
+function makeSequentialCode(index: number) {
+  return `AS-${String(index + 1).padStart(4, "0")}`;
 }
 
 type CommentAuthor = {
@@ -68,7 +68,8 @@ function mapRowToReport(
   row: ReportRow,
   comments: CommentRow[] = [],
   evidence: EvidenceRow[] = [],
-  authors: Record<string, CommentAuthor> = {}
+  authors: Record<string, CommentAuthor> = {},
+  code?: string
 ): Report {
   const media: ReportMedia[] = evidence.length
     ? evidence.map((item) => ({
@@ -87,6 +88,7 @@ function mapRowToReport(
 
   return {
     id: row.id,
+    code,
     title: row.title,
     summary: row.summary,
     description: row.description,
@@ -156,11 +158,36 @@ export const getActiveReports = cache(async (filters: ReportFilters = {}) => {
   const rows = (data || []) as (ReportRow & { report_evidence?: EvidenceRow[] })[];
   const reportIds = rows.map((row) => row.id);
   const { commentsByReport, authors } = await getCommentsForReports(reportIds);
+  const codeByReportId = await getReportCodeMap(reportIds);
 
   return rows.map((row) =>
-    mapRowToReport(row, commentsByReport[row.id] || [], row.report_evidence || [], authors)
+    mapRowToReport(row, commentsByReport[row.id] || [], row.report_evidence || [], authors, codeByReportId[row.id])
   );
 });
+
+async function getReportCodeMap(reportIds: string[]) {
+  const codes: Record<string, string> = {};
+
+  if (!reportIds.length) {
+    return codes;
+  }
+
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("reports").select("id").order("created_at", { ascending: true });
+
+  if (error) {
+    console.error("Failed to map report codes", error.message);
+    return codes;
+  }
+
+  for (const [index, row] of ((data || []) as Array<{ id: string }>).entries()) {
+    if (reportIds.includes(row.id)) {
+      codes[row.id] = makeSequentialCode(index);
+    }
+  }
+
+  return codes;
+}
 
 async function getCommentsForReports(reportIds: string[]) {
   const commentsByReport: Record<string, CommentRow[]> = {};
@@ -239,8 +266,11 @@ export const getDeletedReports = cache(async () => {
     return [];
   }
 
-  return (data as (ReportRow & { report_evidence?: EvidenceRow[] })[]).map((row) => ({
-    ...mapRowToReport(row, [], row.report_evidence || []),
+  const rows = (data || []) as (ReportRow & { report_evidence?: EvidenceRow[] })[];
+  const codeByReportId = await getReportCodeMap(rows.map((row) => row.id));
+
+  return rows.map((row) => ({
+    ...mapRowToReport(row, [], row.report_evidence || [], {}, codeByReportId[row.id]),
     deletedAt: row.deleted_at ? formatDate(row.deleted_at) : "",
     deleteReason: row.delete_reason || ""
   }));
@@ -290,7 +320,14 @@ export const getReportById = cache(async (id: string) => {
   }
 
   const row = data as ReportRow & { report_evidence?: EvidenceRow[] };
-  return mapRowToReport(row, (comments as CommentRow[]) || [], row.report_evidence || [], authors);
+  const codeByReportId = await getReportCodeMap([row.id]);
+  return mapRowToReport(
+    row,
+    (comments as CommentRow[]) || [],
+    row.report_evidence || [],
+    authors,
+    codeByReportId[row.id]
+  );
 });
 
 export function getMetricsFromReports(reports: Report[]) {
@@ -304,6 +341,4 @@ export function getMetricsFromReports(reports: Report[]) {
   };
 }
 
-export function getReportCode(id: string) {
-  return id.startsWith("AS-") ? id : codeFromId(id);
-}
+export { getDisplayReportCode, getReportCode } from "@/lib/reports";

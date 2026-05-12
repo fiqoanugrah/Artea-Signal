@@ -7,7 +7,7 @@ import { Topbar } from "@/components/topbar";
 import { StatusPill } from "@/components/status-pill";
 import { getCurrentUser, isCurrentUserAdmin } from "@/lib/auth";
 import { getDeletedReports } from "@/lib/report-store";
-import { getReportCode, priorityLabels } from "@/lib/reports";
+import { getDisplayReportCode, priorityLabels } from "@/lib/reports";
 
 type TrashReport = Awaited<ReturnType<typeof getDeletedReports>>[number];
 
@@ -16,7 +16,7 @@ function TrashCard({ report }: { report: TrashReport }) {
     <article className="report-card trash-card">
       <div>
         <div className="report-meta">
-          <span>{getReportCode(report.id)}</span>
+          <span>{getDisplayReportCode(report)}</span>
           <span>|</span>
           <span>Deleted {report.deletedAt}</span>
         </div>
