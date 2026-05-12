@@ -3,7 +3,12 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Artea Signal",
-  description: "Public product signal board for Artea AI"
+  description: "Public product signal board for Artea AI",
+  icons: {
+    icon: "/artea-logo.png",
+    shortcut: "/artea-logo.png",
+    apple: "/artea-logo.png"
+  }
 };
 
 export default function RootLayout({
