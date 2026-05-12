@@ -61,7 +61,8 @@ export function ReportBoard({ canManage, reports }: ReportBoardProps) {
           type="button"
         >
           <Sparkles size={16} />
-          All signals
+          <span className="tab-label">All signals</span>
+          <span className="tab-short">All</span>
           <span>{reports.length}</span>
         </button>
         <button
@@ -70,7 +71,8 @@ export function ReportBoard({ canManage, reports }: ReportBoardProps) {
           type="button"
         >
           <Bug size={16} />
-          Bug & audit
+          <span className="tab-label">Bug & audit</span>
+          <span className="tab-short">Bug/audit</span>
           <span>{bugAuditCount}</span>
         </button>
         <button
@@ -79,7 +81,8 @@ export function ReportBoard({ canManage, reports }: ReportBoardProps) {
           type="button"
         >
           <Lightbulb size={16} />
-          Feature ideas
+          <span className="tab-label">Feature ideas</span>
+          <span className="tab-short">Feature</span>
           <span>{featureCount}</span>
         </button>
       </div>
