@@ -1212,17 +1212,29 @@ textarea {
 }
 
 .detail-evidence-carousel {
-  background: rgba(0, 0, 0, 0.18);
-  border: 1px solid var(--line);
-  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
   display: grid;
-  gap: 12px;
-  margin: 12px 0 22px;
-  padding: 14px;
+  gap: 10px;
+  margin: 18px 0 22px;
+  padding: 10px;
+}
+
+.detail-evidence-meta {
+  align-items: center;
+  color: var(--muted);
+  display: flex;
+  font-size: 12px;
+  font-weight: 900;
+  justify-content: space-between;
+  letter-spacing: 0.04em;
+  padding: 0 2px;
+  text-transform: uppercase;
 }
 
 .detail-evidence-stage {
-  background: rgba(255, 255, 255, 0.045);
+  background: rgba(0, 0, 0, 0.28);
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 16px;
   margin: 0;
@@ -1231,9 +1243,9 @@ textarea {
 
 .detail-evidence-stage img,
 .detail-evidence-stage video {
-  background: rgba(0, 0, 0, 0.28);
+  background: rgba(0, 0, 0, 0.32);
   display: block;
-  height: min(62svh, 560px);
+  height: min(68svh, 640px);
   object-fit: contain;
   width: 100%;
 }
@@ -1247,18 +1259,41 @@ textarea {
   padding: 10px 12px;
 }
 
-.detail-carousel-actions {
-  justify-content: space-between;
+.detail-evidence-actions {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.detail-evidence-nav {
+  height: 34px;
+  min-height: 34px;
+  width: 34px;
+}
+
+.detail-evidence-counter {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.075);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  color: var(--muted-strong);
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 900;
+  height: 34px;
+  padding: 0 12px;
 }
 
 .detail-evidence-strip {
   display: grid;
-  gap: 8px;
-  grid-template-columns: repeat(auto-fit, minmax(86px, 1fr));
+  gap: 6px;
+  grid-template-columns: repeat(auto-fit, minmax(62px, 1fr));
 }
 
 .detail-evidence-strip .strip-thumb {
-  height: 82px;
+  border-radius: 10px;
+  height: 56px;
 }
 
 .detail-evidence-strip .strip-thumb img {

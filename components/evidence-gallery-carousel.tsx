@@ -20,6 +20,10 @@ export function EvidenceGalleryCarousel({ evidence }: EvidenceGalleryCarouselPro
 
   return (
     <div className="detail-evidence-carousel">
+      <div className="detail-evidence-meta">
+        <span>Evidence</span>
+        <span>{evidence.length} files</span>
+      </div>
       <figure className="detail-evidence-stage">
         {activeEvidence.mediaType === "video" ? (
           <video controls src={activeEvidence.url} />
@@ -34,20 +38,20 @@ export function EvidenceGalleryCarousel({ evidence }: EvidenceGalleryCarouselPro
         </figcaption>
       </figure>
 
-      <div className="carousel-actions detail-carousel-actions">
+      <div className="detail-evidence-actions">
         <button
-          className="icon-button"
+          className="icon-button detail-evidence-nav"
           disabled={activeIndex === 0}
           onClick={() => setActiveIndex((index) => Math.max(0, index - 1))}
           type="button"
         >
           <ChevronLeft size={17} />
         </button>
-        <span className="filter-pill">
+        <span className="detail-evidence-counter">
           {activeIndex + 1} / {evidence.length}
         </span>
         <button
-          className="icon-button"
+          className="icon-button detail-evidence-nav"
           disabled={activeIndex === evidence.length - 1}
           onClick={() => setActiveIndex((index) => Math.min(evidence.length - 1, index + 1))}
           type="button"
