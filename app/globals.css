@@ -1587,6 +1587,11 @@ textarea {
     justify-content: center;
   }
 
+  .hero-panel {
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
   .hero-copy,
   .hero-visual {
     border-radius: 22px;
@@ -1594,7 +1599,98 @@ textarea {
   }
 
   .hero-copy {
-    padding: 24px;
+    padding: 18px;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    margin-bottom: 12px;
+    padding: 7px 10px;
+  }
+
+  .hero-copy h1 {
+    font-size: 42px;
+    line-height: 0.94;
+    margin-bottom: 12px;
+  }
+
+  .hero-copy p {
+    display: -webkit-box;
+    font-size: 15px;
+    line-height: 1.45;
+    max-width: none;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .hero-actions {
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .hero-actions .button,
+  .hero-actions .filter-pill {
+    min-height: 40px;
+    padding: 10px 12px;
+  }
+
+  .signal-console {
+    padding: 12px;
+  }
+
+  .console-header {
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+
+  .console-feature {
+    border-radius: 18px;
+    gap: 12px;
+    grid-template-columns: 104px minmax(0, 1fr);
+    padding: 10px;
+  }
+
+  .console-feature img,
+  .console-feature video {
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    height: auto;
+    min-height: 104px;
+  }
+
+  .console-feature h2 {
+    font-size: 22px;
+    line-height: 1.05;
+    margin: 8px 0 0;
+  }
+
+  .console-feature p {
+    display: none;
+  }
+
+  .console-feature .pill {
+    font-size: 11px;
+    padding: 5px 9px;
+  }
+
+  .console-list {
+    border-radius: 16px;
+    margin-top: 10px;
+  }
+
+  .console-list a {
+    min-height: 44px;
+    padding: 9px 10px;
+  }
+
+  .console-list span,
+  .console-list strong {
+    font-size: 12px;
+  }
+
+  .console-list strong {
+    padding: 5px 8px;
   }
 
   .metrics-grid,
