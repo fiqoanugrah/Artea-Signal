@@ -1,5 +1,6 @@
 import { LockKeyhole, LogIn, RadioTower, ShieldCheck } from "lucide-react";
 import { login } from "@/app/auth/actions";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { Topbar } from "@/components/topbar";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 
@@ -75,10 +76,10 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             <input id="password" minLength={6} name="password" required type="password" />
           </div>
 
-          <button className="button button-primary" type="submit">
+          <PendingSubmitButton pendingText="Logging in...">
             <LogIn size={16} />
             Login
-          </button>
+          </PendingSubmitButton>
 
           <p className="auth-switch">
             Belum punya akun? Minta admin Artea Signal untuk invite kamu.

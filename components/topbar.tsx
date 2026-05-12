@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { LogIn, LogOut, Plus, RadioTower, Shield, Trash2, UserCircle } from "lucide-react";
 import { logout } from "@/app/auth/actions";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { getCurrentProfile, getCurrentUser } from "@/lib/auth";
 
 export async function Topbar() {
@@ -48,10 +49,10 @@ export async function Topbar() {
             </Link>
             <form action={logout} className="inline-form">
               <span className="filter-pill">{user.email}</span>
-              <button className="button button-primary" type="submit">
+              <PendingSubmitButton pendingText="Logging out...">
                 <LogOut size={16} />
                 Logout
-              </button>
+              </PendingSubmitButton>
             </form>
           </>
         ) : (

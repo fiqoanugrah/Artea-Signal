@@ -177,6 +177,20 @@ textarea {
   transform: none;
 }
 
+.button.is-loading {
+  pointer-events: none;
+}
+
+.loading-spinner {
+  animation: spin 900ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .button-primary {
   background: linear-gradient(135deg, var(--purple), #9d43ff 52%, var(--orange));
   border-color: rgba(255, 255, 255, 0.24);

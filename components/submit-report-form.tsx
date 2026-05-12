@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Camera, LockKeyhole, Send } from "lucide-react";
+import { Camera, LoaderCircle, LockKeyhole, Send } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { EvidencePicker } from "@/components/evidence-picker";
 import { createBrowserSupabaseClient } from "@/lib/supabase/browser";
@@ -209,9 +209,17 @@ export function SubmitReportForm({ userEmail }: SubmitReportFormProps) {
 
         <div className="nav-actions" style={{ justifyContent: "flex-start" }}>
           {isLoggedIn ? (
-            <button className="button button-primary" disabled={isSubmitting} type="submit">
-              <Send size={16} />
-              {isSubmitting ? "Submitting..." : "Submit report"}
+            <button
+              className={isSubmitting ? "button button-primary is-loading" : "button button-primary"}
+              disabled={isSubmitting}
+              type="submit"
+            >
+              {isSubmitting ? (
+                <LoaderCircle className="loading-spinner" size={16} />
+              ) : (
+                <Send size={16} />
+              )}
+              {isSubmitting ? "Submitting report..." : "Submit report"}
             </button>
           ) : (
             <Link className="button button-primary" href="/login?next=/submit">

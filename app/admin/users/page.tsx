@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LockKeyhole, Send, Shield, UserPlus } from "lucide-react";
 import { inviteUser } from "@/app/auth/actions";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { Topbar } from "@/components/topbar";
 import { getCurrentProfile, getCurrentUser } from "@/lib/auth";
 import { isSupabaseAdminConfigured, isSupabaseConfigured } from "@/lib/supabase/config";
@@ -105,10 +106,10 @@ export default async function AdminUsersPage({ searchParams }: AdminUsersPagePro
                 </select>
               </div>
 
-              <button className="button button-primary" type="submit">
+              <PendingSubmitButton pendingText="Sending invite...">
                 <Send size={16} />
                 Send invite
-              </button>
+              </PendingSubmitButton>
             </form>
           ) : null}
         </div>

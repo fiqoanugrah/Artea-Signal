@@ -38,7 +38,7 @@ export default async function Home() {
   const featuredSignal = liveQueue[0];
   const featuredMedia =
     featuredSignal?.evidence.find((item) => item.url === featuredSignal.evidenceUrl) || featuredSignal?.evidence[0];
-  const nextSignals = liveQueue.slice(1, 3);
+  const nextSignals = liveQueue.slice(1, 6);
 
   return (
     <main className="page-shell">

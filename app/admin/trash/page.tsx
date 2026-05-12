@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, RotateCcw } from "lucide-react";
 import { permanentlyDeleteReport, restoreReport } from "@/app/reports/actions";
 import { ConfirmTrashButton } from "@/components/confirm-trash-button";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { Topbar } from "@/components/topbar";
 import { StatusPill } from "@/components/status-pill";
 import { getCurrentUser, isCurrentUserAdmin } from "@/lib/auth";
@@ -32,10 +33,10 @@ function TrashCard({ report }: { report: TrashReport }) {
         <div className="trash-actions">
           <form action={restoreReport}>
             <input name="report_id" type="hidden" value={report.id} />
-            <button className="button button-primary" type="submit">
+            <PendingSubmitButton pendingText="Restoring...">
               <RotateCcw size={16} />
               Restore
-            </button>
+            </PendingSubmitButton>
           </form>
           <form action={permanentlyDeleteReport}>
             <input name="report_id" type="hidden" value={report.id} />

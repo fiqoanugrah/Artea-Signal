@@ -5,6 +5,7 @@ import { ArrowLeft, CheckCircle2, LockKeyhole, MessageSquare, Send, Trash2 } fro
 import { addComment, moveReportToTrash, updateReportPriority, updateReportStatus } from "@/app/reports/actions";
 import { ConfirmTrashButton } from "@/components/confirm-trash-button";
 import { EvidenceGalleryCarousel } from "@/components/evidence-gallery-carousel";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { StatusPill } from "@/components/status-pill";
 import { Topbar } from "@/components/topbar";
 import { canCurrentUserTriage, getCurrentUser, isCurrentUserAdmin } from "@/lib/auth";
@@ -129,10 +130,10 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
                       <option value="rejected">Rejected</option>
                     </select>
                   </div>
-                  <button className="button button-secondary" type="submit">
+                  <PendingSubmitButton className="button button-secondary" pendingText="Updating status...">
                     <CheckCircle2 size={16} />
                     Update status
-                  </button>
+                  </PendingSubmitButton>
                 </form>
                 <form action={updateReportPriority} className="inline-form">
                   <input name="report_id" type="hidden" value={report.id} />
@@ -145,10 +146,10 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
                       <option value="urgent">Urgent</option>
                     </select>
                   </div>
-                  <button className="button button-secondary" type="submit">
+                  <PendingSubmitButton className="button button-secondary" pendingText="Updating priority...">
                     <CheckCircle2 size={16} />
                     Update priority
-                  </button>
+                  </PendingSubmitButton>
                 </form>
               </>
             ) : null}
@@ -207,10 +208,10 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
                 <label htmlFor="body">Add comment</label>
                 <textarea id="body" name="body" placeholder="Tambah input, konteks, atau follow-up." />
               </div>
-              <button className="button button-secondary" type="submit">
+              <PendingSubmitButton className="button button-secondary" pendingText="Adding comment...">
                 <Send size={16} />
                 Add comment
-              </button>
+              </PendingSubmitButton>
             </form>
           ) : (
             <button className="button button-secondary" type="button" disabled>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { KeyRound, LockKeyhole, Save, Shield, Sparkles, UserCircle } from "lucide-react";
 import { updatePassword, updateProfile } from "@/app/auth/actions";
+import { PendingSubmitButton } from "@/components/pending-submit-button";
 import { Topbar } from "@/components/topbar";
 import { getCurrentProfile, getCurrentUser } from "@/lib/auth";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
@@ -107,10 +108,10 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
                   <label htmlFor="avatar">Profile picture</label>
                   <input id="avatar" name="avatar" accept="image/*" type="file" />
                 </div>
-                <button className="button button-primary" type="submit">
+                <PendingSubmitButton pendingText="Saving profile...">
                   <Save size={16} />
                   Save profile
-                </button>
+                </PendingSubmitButton>
               </form>
 
               <form action={updatePassword} className="form-grid">
@@ -124,10 +125,10 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
                     <input id="confirm_password" minLength={6} name="confirm_password" type="password" />
                   </div>
                 </div>
-                <button className="button button-secondary" type="submit">
+                <PendingSubmitButton className="button button-secondary" pendingText="Changing password...">
                   <KeyRound size={16} />
                   Change password
-                </button>
+                </PendingSubmitButton>
               </form>
 
               {profile?.role === "admin" ? (
